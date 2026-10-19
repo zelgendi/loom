@@ -2,7 +2,7 @@
 # Da completare prima della messa online: sostituire PROPRIETARIO/NOME-REPO con il repository GitHub reale.
 backend:
   name: github
-  repo: PROPRIETARIO/NOME-REPO
+  repo: zelgendi/loom
   branch: main
 
 locale: "it"
