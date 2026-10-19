@@ -1,0 +1,101 @@
+{
+  "immobili": [
+    {
+      "codice": "LM01",
+      "pubblicato": true,
+      "evidenza": true,
+      "contratto": "affitto",
+      "stato": "disponibile",
+      "titolo": "Bilocale luminoso",
+      "titolo_en": "Bright one bedroom flat",
+      "zona": "Brera",
+      "prezzo": 1850,
+      "superficie": 62,
+      "locali": 2,
+      "bagni": 1,
+      "piano": 3,
+      "classe": "C",
+      "descrizione": "Annuncio di esempio. Bilocale arredato in un palazzo d'epoca con portineria. Soggiorno con cucina a vista, camera matrimoniale e bagno finestrato.\n\nDisponibile da subito.",
+      "descrizione_en": "Sample listing. Furnished flat in a period building with concierge. Living room with open kitchen, double bedroom and bathroom with window.\n\nAvailable now.",
+      "foto": [
+        "https://static.wixstatic.com/media/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_bac63542fc1d4b9982e86e575f3a2c27f000.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bac63542fc1d4b9982e86e575f3a2c27f000.jpg"
+      ],
+      "planimetria": ""
+    },
+    {
+      "codice": "LM02",
+      "pubblicato": true,
+      "evidenza": true,
+      "contratto": "vendita",
+      "stato": "disponibile",
+      "titolo": "Trilocale con terrazzo",
+      "titolo_en": "Two bedroom flat with terrace",
+      "zona": "Magenta",
+      "prezzo": 740000,
+      "superficie": 108,
+      "locali": 3,
+      "bagni": 2,
+      "piano": 5,
+      "classe": "B",
+      "descrizione": "Annuncio di esempio. Ultimo piano con terrazzo abitabile, doppia esposizione e cantina.",
+      "descrizione_en": "Sample listing. Top floor with a large terrace, dual aspect and cellar.",
+      "foto": [
+        "https://static.wixstatic.com/media/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_fea201a15d9441f29ddffd89e6f9d1a1~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_fea201a15d9441f29ddffd89e6f9d1a1~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_bac63542fc1d4b9982e86e575f3a2c27f000.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bac63542fc1d4b9982e86e575f3a2c27f000.jpg"
+      ],
+      "planimetria": ""
+    },
+    {
+      "codice": "LM03",
+      "pubblicato": true,
+      "evidenza": true,
+      "contratto": "breve",
+      "stato": "disponibile",
+      "titolo": "Monolocale di design",
+      "titolo_en": "Design studio flat",
+      "zona": "Porta Romana",
+      "prezzo": 140,
+      "superficie": 38,
+      "locali": 1,
+      "bagni": 1,
+      "piano": 2,
+      "classe": "D",
+      "descrizione": "Annuncio di esempio. Monolocale ristrutturato, ideale per soggiorni brevi in città.",
+      "descrizione_en": "Sample listing. Renovated studio, ideal for short stays in the city.",
+      "foto": [
+        "https://static.wixstatic.com/media/30e230_fea201a15d9441f29ddffd89e6f9d1a1~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_fea201a15d9441f29ddffd89e6f9d1a1~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg"
+      ],
+      "planimetria": ""
+    },
+    {
+      "codice": "LM04",
+      "pubblicato": true,
+      "evidenza": false,
+      "contratto": "affitto",
+      "stato": "affittato",
+      "titolo": "Quadrilocale in corte",
+      "titolo_en": "Three bedroom courtyard flat",
+      "zona": "Sant'Ambrogio",
+      "prezzo": 2900,
+      "superficie": 140,
+      "locali": 4,
+      "bagni": 2,
+      "piano": 1,
+      "classe": "E",
+      "descrizione": "Annuncio di esempio. Ampio appartamento affacciato su una corte interna silenziosa.",
+      "descrizione_en": "Sample listing. Spacious flat overlooking a quiet inner courtyard.",
+      "foto": [
+        "https://static.wixstatic.com/media/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg",
+        "https://static.wixstatic.com/media/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg"
+      ],
+      "planimetria": ""
+    }
+  ]
+}

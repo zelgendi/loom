@@ -1,0 +1,68 @@
+# Pannello annunci LOOM (Decap CMS)
+# Da completare prima della messa online: sostituire PROPRIETARIO/NOME-REPO con il repository GitHub reale.
+backend:
+  name: github
+  repo: PROPRIETARIO/NOME-REPO
+  branch: main
+
+locale: "it"
+
+media_folder: "images/immobili"
+public_folder: "images/immobili"
+
+collections:
+  - name: "immobili"
+    label: "Immobili"
+    files:
+      - name: "elenco"
+        label: "Elenco immobili"
+        file: "data/immobili.json"
+        fields:
+          - name: "immobili"
+            label: "Immobili"
+            label_singular: "immobile"
+            widget: "list"
+            collapsed: true
+            summary: "{{fields.codice}}  {{fields.titolo}}, {{fields.zona}}"
+            fields:
+              - {name: "codice", label: "Codice annuncio", widget: "string", hint: "Solo lettere e numeri, senza spazi. Esempio LM05. Deve essere diverso per ogni immobile.", pattern: ["^[A-Za-z0-9]+$", "Usa solo lettere e numeri, senza spazi"]}
+              - {name: "pubblicato", label: "Visibile sul sito", widget: "boolean", default: true, required: false}
+              - {name: "evidenza", label: "In evidenza in home page", widget: "boolean", default: false, required: false}
+              - name: "contratto"
+                label: "Contratto"
+                widget: "select"
+                options:
+                  - {label: "Vendita", value: "vendita"}
+                  - {label: "Affitto", value: "affitto"}
+                  - {label: "Affitto breve", value: "breve"}
+              - name: "stato"
+                label: "Stato"
+                widget: "select"
+                default: "disponibile"
+                options:
+                  - {label: "Disponibile", value: "disponibile"}
+                  - {label: "In trattativa", value: "trattativa"}
+                  - {label: "Venduto", value: "venduto"}
+                  - {label: "Affittato", value: "affittato"}
+              - {name: "titolo", label: "Titolo (italiano)", widget: "string", hint: "Breve, per esempio Bilocale luminoso"}
+              - {name: "titolo_en", label: "Titolo (inglese)", widget: "string", required: false, hint: "Se vuoto, in inglese si vede il titolo italiano"}
+              - {name: "zona", label: "Zona", widget: "string", hint: "Per esempio Brera"}
+              - {name: "prezzo", label: "Prezzo in euro", widget: "number", value_type: "int", required: false, hint: "Solo il numero. Vendita: prezzo totale. Affitto: al mese. Affitto breve: a notte. Lascia vuoto per Prezzo su richiesta."}
+              - {name: "superficie", label: "Superficie in m²", widget: "number", value_type: "int", required: false}
+              - {name: "locali", label: "Locali", widget: "number", value_type: "int", required: false}
+              - {name: "bagni", label: "Bagni", widget: "number", value_type: "int", required: false}
+              - {name: "piano", label: "Piano", widget: "number", value_type: "int", required: false, hint: "Scrivi 0 per il piano terra"}
+              - name: "classe"
+                label: "Classe energetica"
+                widget: "select"
+                required: false
+                options: ["A4","A3","A2","A1","B","C","D","E","F","G",{label: "In attesa di certificazione", value: "nd"}]
+              - {name: "descrizione", label: "Descrizione (italiano)", widget: "text", required: false, hint: "Lascia una riga vuota per andare a capo con un nuovo paragrafo"}
+              - {name: "descrizione_en", label: "Descrizione (inglese)", widget: "text", required: false}
+              - name: "foto"
+                label: "Foto"
+                widget: "list"
+                required: false
+                hint: "La prima foto è la copertina. Trascina per cambiare l'ordine. Usa foto orizzontali, possibilmente sotto i 500 KB."
+                field: {name: "immagine", label: "Foto", widget: "image"}
+              - {name: "planimetria", label: "Planimetria", widget: "image", required: false}

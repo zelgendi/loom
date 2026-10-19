@@ -1,0 +1,33 @@
+LOOM House by Zena · sito web
+
+STRUTTURA
+index.html, immobili.html, immobile.html, servizi.html, chi-siamo.html, contatti.html, grazie.html, privacy.html, cookie.html
+css/style.css e js/main.js: foglio di stile e script condivisi. Ogni pagina ne contiene una copia incorporata, racchiusa tra i commenti LOOM:STYLE e LOOM:SCRIPT, così funziona anche aperta da sola.
+Intestazione e piè di pagina sono racchiusi tra i commenti LOOM:HEADER e LOOM:FOOTER.
+data/immobili.json: elenco degli annunci, modificato dal pannello.
+admin/: pannello annunci (Decap CMS).
+images/: logo, favicon, immagine di anteprima social. images/immobili/ riceve le foto caricate dal pannello.
+fonts/: carattere Jost ospitato in locale, licenza in fonts/OFL-Jost.txt.
+
+NOTA SUGLI ANNUNCI
+Online le pagine leggono data/immobili.json. Aperte dal disco usano una copia di riserva contenuta nello script, quindi mostrano gli annunci di esempio.
+Prima di mandare uno zip per correzioni, scaricarlo da GitHub, così contiene gli annunci inseriti dalla cliente.
+
+MESSA ONLINE
+1. Creare un repository GitHub (privato va bene) e caricarci tutti i file di questa cartella.
+2. Creare un progetto Netlify collegato al repository, senza comando di build e con cartella di pubblicazione la radice.
+3. Collegare il dominio e attivare HTTPS.
+4. Su GitHub creare una OAuth App: Homepage URL il dominio del sito, Authorization callback URL https://api.netlify.com/auth/done
+5. In Netlify, nelle impostazioni di accesso OAuth del progetto, aggiungere GitHub come provider con Client ID e Client Secret della OAuth App.
+6. In admin/config.yml sostituire PROPRIETARIO/NOME-REPO con il repository reale.
+7. Invitare l'account GitHub della cliente come collaboratore del repository.
+8. La cliente entra da tuodominio/admin/ con il pulsante di accesso GitHub.
+
+FORMSUBMIT
+I moduli inviano a z.elgendi@gmail.com. Il primo invio dal sito online genera una email di attivazione da FormSubmit: va confermata, poi i messaggi arrivano normalmente.
+
+PRIMA DEL LANCIO
+1. Sostituire le foto segnaposto: ora sono caricate dal vecchio sito Wix (static.wixstatic.com).
+2. Sostituire gli annunci di esempio LM01, LM02, LM03, LM04 dal pannello.
+3. Far verificare privacy e cookie policy da un consulente.
+4. Inserire il dominio definitivo nei meta og:image se si vuole un'anteprima social con indirizzo assoluto.
