@@ -140,7 +140,7 @@
     return a;
   }
   function href(l){return 'immobile.html?id='+encodeURIComponent(l.codice)}
-  function mark(){return '<span class="ph-empty"><svg class="logo" viewBox="0 0 768 206" aria-hidden="true"><use href="#mark"/></svg></span>'}
+  function mark(){return '<span class="ph-empty"><svg class="logo" viewBox="0 0 768 296" aria-hidden="true"><use href="#full"/></svg></span>'}
   function card(l,i){
     var t=T[lang],ti=tx(l,'titolo'),off=l.stato==='venduto'||l.stato==='affittato';
     var img=(l.foto&&l.foto[0])?'<img src="'+esc(l.foto[0])+'" alt="'+esc(ti+', '+l.zona)+'" loading="lazy">':mark();
