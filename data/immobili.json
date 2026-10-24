@@ -1,6 +1,28 @@
 {
   "immobili": [
     {
+      "codice": "LM05",
+      "pubblicato": true,
+      "evidenza": true,
+      "contratto": "breve",
+      "stato": "disponibile",
+      "titolo": "Bilocale luminoso",
+      "titolo_en": "",
+      "zona": "Brera",
+      "prezzo": null,
+      "superficie": 2,
+      "locali": 1,
+      "bagni": 1,
+      "piano": null,
+      "classe": "",
+      "descrizione": "",
+      "descrizione_en": "",
+      "foto": [
+        "images/immobili/lm05_mvmpg2ns_1.jpg"
+      ],
+      "planimetria": ""
+    },
+    {
       "codice": "LM01",
       "pubblicato": true,
       "evidenza": true,
