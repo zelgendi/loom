@@ -28,7 +28,7 @@
   --green:#2C4238;--rose:#E8BCA9;--stone:#CBC3B6;--line:rgba(30,28,25,.16);
   --gut:clamp(20px,4.5vw,96px);
   --sec:clamp(64px,8vw,160px);
-  --navh:clamp(64px,5.6vw,96px);
+  --navh:clamp(70px,6vw,104px);
   --fs-hero:clamp(2.7rem,8.4vw,10.5rem);
   --fs-h1:clamp(2.5rem,6.4vw,7.6rem);
   --fs-h2:clamp(1.9rem,4.2vw,5rem);
@@ -74,7 +74,7 @@ svg.logo{display:block;width:100%;height:auto;overflow:visible}
 .hdr{position:fixed;top:0;left:0;right:0;z-index:50;height:calc(var(--navh) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--gut) 0;display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--cream);color:var(--ink);transition:background .35s,color .35s,box-shadow .35s}
 .hdr.is-over{background:transparent;color:var(--cream)}
 .hdr.is-scrolled{box-shadow:0 1px 0 var(--line)}
-.brand{display:block;width:clamp(96px,7.4vw,140px)}
+.brand{display:block;width:clamp(126px,9.6vw,184px)}
 .menu{display:flex;gap:clamp(18px,2.2vw,44px)}
 .menu a{text-decoration:none;font-size:var(--fs-small)}
 .menu a:hover,.menu a[aria-current="page"]{text-decoration:underline;text-underline-offset:6px}
@@ -137,7 +137,7 @@ body.nav-open .hdr{background:var(--cream);color:var(--ink)}
 .card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
 .card .ph:hover img{transform:scale(1.04)}
 .ph-empty{position:absolute;inset:0;display:grid;place-items:center;color:rgba(30,28,25,.35)}
-.ph-empty svg{width:34%}
+.ph-empty svg{width:44%}
 .tag{position:absolute;top:14px;left:14px;padding:.35em .85em;border-radius:999px;background:var(--cream);color:var(--ink);font-size:.82rem;line-height:1.2}
 .tag--off{background:var(--ink);color:var(--cream)}
 .info{padding-top:16px;display:grid;gap:5px}
@@ -300,7 +300,7 @@ body.nav-open .hdr{background:var(--cream);color:var(--ink)}
 <a class="skip" href="#main" data-en="Skip to content">Vai al contenuto</a>
 <!-- LOOM:HEADER -->
 <header class="hdr">
-  <a class="brand" href="index.html" aria-label="LOOM, home"><svg class="logo" viewBox="0 0 768 206" aria-hidden="true"><use href="#mark"/></svg></a>
+  <a class="brand" href="index.html" aria-label="LOOM House by Zena, home"><svg class="logo" viewBox="0 0 768 296" aria-hidden="true"><use href="#full"/></svg></a>
   <nav class="menu" aria-label="Menu principale" data-en-aria="Main menu"><a href="immobili.html" data-en="Properties">Immobili</a><a href="servizi.html" data-en="Services">Servizi</a><a href="chi-siamo.html" data-en="About">Chi siamo</a><a href="contatti.html" data-en="Contact">Contatti</a></nav>
   <div class="hdr-right">
     <div class="lang" role="group" aria-label="Lingua" data-en-aria="Language"><button type="button" data-set="it" aria-pressed="true">IT</button><span aria-hidden="true">/</span><button type="button" data-set="en" aria-pressed="false">EN</button></div>
@@ -533,7 +533,7 @@ body.nav-open .hdr{background:var(--cream);color:var(--ink)}
     return a;
   }
   function href(l){return 'immobile.html?id='+encodeURIComponent(l.codice)}
-  function mark(){return '<span class="ph-empty"><svg class="logo" viewBox="0 0 768 206" aria-hidden="true"><use href="#mark"/></svg></span>'}
+  function mark(){return '<span class="ph-empty"><svg class="logo" viewBox="0 0 768 296" aria-hidden="true"><use href="#full"/></svg></span>'}
   function card(l,i){
     var t=T[lang],ti=tx(l,'titolo'),off=l.stato==='venduto'||l.stato==='affittato';
     var img=(l.foto&&l.foto[0])?'<img src="'+esc(l.foto[0])+'" alt="'+esc(ti+', '+l.zona)+'" loading="lazy">':mark();

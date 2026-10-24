@@ -5,7 +5,8 @@ index.html, immobili.html, immobile.html, servizi.html, chi-siamo.html, contatti
 css/style.css e js/main.js: foglio di stile e script condivisi. Ogni pagina ne contiene una copia incorporata, racchiusa tra i commenti LOOM:STYLE e LOOM:SCRIPT, così funziona anche aperta da sola.
 Intestazione e piè di pagina sono racchiusi tra i commenti LOOM:HEADER e LOOM:FOOTER.
 data/immobili.json: elenco degli annunci, modificato dal pannello.
-admin/: pannello annunci (Decap CMS).
+admin/: pannello annunci. index.html è il pannello, config.yml serve solo a indicare il repository GitHub.
+Anteprima del pannello senza salvare nulla: tuodominio/admin/?demo=1
 images/: logo, favicon, immagine di anteprima social. images/immobili/ riceve le foto caricate dal pannello.
 fonts/: carattere Jost ospitato in locale, licenza in fonts/OFL-Jost.txt.
 
