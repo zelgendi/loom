@@ -8,7 +8,7 @@ data/immobili.json: elenco degli annunci, modificato dal pannello.
 admin/: pannello annunci. index.html è il pannello, config.yml serve solo a indicare il repository GitHub.
 Anteprima del pannello senza salvare nulla: tuodominio/admin/?demo=1
 images/: logo, favicon, immagine di anteprima social. images/immobili/ riceve le foto caricate dal pannello.
-fonts/: carattere Jost ospitato in locale, licenza in fonts/OFL-Jost.txt.
+fonts/: caratteri ospitati in locale. Hanken Grotesk per i testi, Newsreader per i titoli, Jost per la scritta del logo. Licenze nei file OFL.
 
 NOTA SUGLI ANNUNCI
 Online le pagine leggono data/immobili.json. Aperte dal disco usano una copia di riserva contenuta nello script, quindi mostrano gli annunci di esempio.

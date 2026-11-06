@@ -390,6 +390,7 @@ function orderView(){
 function nextCode(){var n=0;S.data.forEach(function(x){var m=/^LM(\d+)$/i.exec(x.codice||'');if(m)n=Math.max(n,+m[1])});return 'LM'+String(n+1).padStart(2,'0')}
 function openEdit(i){
   var isNew=i===null,l=isNew?{codice:nextCode(),pubblicato:true,evidenza:false,contratto:'vendita',stato:'disponibile',titolo:'',titolo_en:'',zona:'',prezzo:null,superficie:null,locali:null,bagni:null,piano:null,classe:'',descrizione:'',descrizione_en:'',foto:[],planimetria:''}:clone(S.data[i]);
+  l.pf_txt=(l.punti_forza||[]).join('\n');l.pf_en_txt=(l.punti_forza_en||[]).join('\n');
   S.edit={i:i,isNew:isNew,l:l,onreq:!isNew&&(l.prezzo===null||l.prezzo===undefined||l.prezzo===''),photos:(l.foto||[]).map(function(p){return{path:p}}),plan:l.planimetria?{path:l.planimetria}:null};
   S.dirty=false;S.errors={};go('edit');
 }
@@ -417,14 +418,16 @@ function editView(){
     '<div class="row2"><div class="f"><label for="k_piano">Piano</label><select class="in" id="k_piano" data-k="piano">'+floors.map(function(o){return '<option value="'+o[0]+'"'+(String(l.piano===null||l.piano===undefined?'':l.piano)===o[0]?' selected':'')+'>'+o[1]+'</option>'}).join('')+'</select></div><div></div></div>'+
     '<div class="f"><span class="lb">Classe energetica</span>'+choice('classe',CLASSI.map(function(c){return[c,c]}).concat([['nd','In attesa'],['','Non indicata']]),true)+'</div>')+
   sec(4,'Descrizione','Lascia una riga vuota per iniziare un nuovo paragrafo.',
-    '<div class="f"><textarea class="in" data-k="descrizione" aria-label="Descrizione" placeholder="Racconta la casa in poche righe">'+esc(l.descrizione||'')+'</textarea></div>')+
+    '<div class="f"><textarea class="in" data-k="descrizione" aria-label="Descrizione" placeholder="Racconta la casa in poche righe">'+esc(l.descrizione||'')+'</textarea></div>'+
+    '<div class="f"><label for="k_pf">Punti di forza</label><span class="hint">Facoltativi. Uno per riga, brevi: compaiono in grande nella pagina dell\'immobile.</span><textarea class="in" id="k_pf" data-k="pf_txt" style="min-height:120px" placeholder="Terrazzo con vista">'+esc(l.pf_txt||'')+'</textarea></div>')+
   sec(5,'Versione inglese','Facoltativa. Se resta vuota, sul sito in inglese compare il testo italiano.',
-    inp('titolo_en','Titolo in inglese','For example Bright one bedroom flat')+'<div class="f"><label for="k_den">Descrizione in inglese</label><textarea class="in" id="k_den" data-k="descrizione_en">'+esc(l.descrizione_en||'')+'</textarea></div>')+
+    inp('titolo_en','Titolo in inglese','For example Bright one bedroom flat')+'<div class="f"><label for="k_den">Descrizione in inglese</label><textarea class="in" id="k_den" data-k="descrizione_en">'+esc(l.descrizione_en||'')+'</textarea></div>'+
+    '<div class="f"><label for="k_pfen">Punti di forza in inglese</label><textarea class="in" id="k_pfen" data-k="pf_en_txt" style="min-height:120px" placeholder="Terrace with a view">'+esc(l.pf_en_txt||'')+'</textarea></div>')+
   sec(6,'Planimetria','Facoltativa.',
     E.plan?'<div class="plan"><img src="'+esc(E.plan.dataUrl||src(E.plan.path))+'" alt="Planimetria"><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn btn--ghost btn--sm" data-act="plan">Sostituisci</button><button type="button" class="btn btn--danger btn--sm" data-act="plandel">Rimuovi</button></div></div>':'<button type="button" class="btn btn--ghost" data-act="plan">'+ic('img')+' Carica la planimetria</button>')+
   sec(7,'Pubblicazione','',
     '<div class="f"><span class="lb">Stato</span>'+choice('stato',statOpts)+'</div>'+
-    '<div class="row2">'+sw('pubblicato','Visibile sul sito','Se lo spegni, l\'annuncio resta qui ma non si vede')+sw('evidenza','In evidenza in home','Compare tra gli immobili della home page')+'</div>'+
+    '<div class="row2">'+sw('pubblicato','Visibile sul sito','Se lo spegni, l\'annuncio resta qui ma non si vede')+sw('evidenza','In evidenza in home','La home ne mostra due: i primi in elenco tra quelli accesi')+'</div>'+
     '<p class="code">Codice annuncio <b>'+esc(l.codice)+'</b>, usato nel link della pagina.</p>');
   return '<div class="ebar"><div class="l"><button class="ibtn" data-act="back" aria-label="Torna all\'elenco">'+ic('back')+'</button><h1>'+(E.isNew?'Nuovo immobile':esc(l.titolo||'Senza titolo'))+'</h1>'+(S.dirty?'<span class="dirty">Modifiche non salvate</span>':'')+'</div><div class="r">'+(E.isNew?'':'<button class="btn btn--danger" data-act="del">'+ic('trash')+'<span>Elimina</span></button>')+'<button class="btn btn--primary" data-act="save">Salva e pubblica</button></div></div>'+
   '<main class="wrap"><div class="egrid"><div>'+body+'</div><aside class="side"><span class="pv-h">Anteprima sul sito</span><div class="pv" id="pv">'+preview()+'</div><div class="note">'+ic('info')+'<span>Quando premi Salva e pubblica, il sito si aggiorna da solo in un paio di minuti.</span></div></aside></div></main>'+
@@ -465,6 +468,8 @@ function addFiles(files,plan){
 function collect(){
   var E=S.edit,l=clone(E.l);
   l.titolo=(l.titolo||'').trim();l.zona=(l.zona||'').trim();l.titolo_en=(l.titolo_en||'').trim();
+  var lines=function(t){return String(t||'').split('\n').map(function(x){return x.trim()}).filter(Boolean)};
+  l.punti_forza=lines(l.pf_txt);l.punti_forza_en=lines(l.pf_en_txt);delete l.pf_txt;delete l.pf_en_txt;
   ['superficie','locali','bagni'].forEach(function(k){l[k]=num(l[k])});
   l.piano=(l.piano===''||l.piano===null||l.piano===undefined)?null:parseInt(l.piano,10);
   l.prezzo=E.onreq?null:num(l.prezzo);
