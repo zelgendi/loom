@@ -79,7 +79,6 @@ svg.logo{display:block;width:100%;height:auto;overflow:visible}
 /* Intestazione */
 .hdr{position:fixed;top:0;left:0;right:0;z-index:50;height:calc(var(--navh) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--gut) 0;display:grid;grid-template-columns:1fr 1fr;align-items:center;background:var(--bar);color:var(--ink);transition:background .35s,color .35s,transform .45s var(--ease)}
 .hdr.is-over{background:transparent;color:var(--cream)}
-.hdr.is-hidden{transform:translateY(-100%)}
 .brand{position:absolute;left:50%;top:calc(50% + env(safe-area-inset-top,0px) / 2);width:var(--logo-w);transform:translate(-50%,-50%);transform-origin:50% 50%;z-index:2}
 .nav-l{justify-self:start;display:flex;align-items:center;gap:clamp(16px,2vw,32px)}
 .nav-r{justify-self:end;display:flex;align-items:center;gap:clamp(16px,2vw,32px)}
@@ -145,12 +144,11 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .count{font-size:var(--fs-small);color:var(--muted)}
 
 /* Servizi in home */
-.svc-band{background:var(--green);color:var(--cream)}
+.svc-band{background:var(--bar);color:var(--ink)}
 .svc-cols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(24px,2.2vw,44px)}
-.svc-col{border-top:1px solid rgba(253,251,247,.3);padding-top:18px;display:grid;gap:10px;align-content:start}
+.svc-col{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:10px;align-content:start}
 .svc-col p{opacity:.82;font-size:var(--fs-small);max-width:32ch}
 .svc-col .link{justify-self:start;font-size:var(--fs-small)}
-.svc-band .btn:hover{background:var(--cream);color:var(--green);border-color:var(--cream)}
 @media (max-width:1200px){.svc-cols{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:820px){.svc-cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.svc-cols{grid-template-columns:1fr}}
@@ -428,7 +426,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   function mail(){return MAIL.u+'@'+MAIL.d}
 
   /* Copia di riserva degli annunci, usata solo se data/immobili.json non si può leggere (file aperto dal disco) */
-  var FALLBACK=/*FALLBACK_START*/{"immobili": [{"codice": "LM01", "pubblicato": true, "evidenza": true, "contratto": "affitto", "stato": "affittato", "titolo": "Bilocale luminoso", "titolo_en": "Bright one bedroom flat", "zona": "Brera", "prezzo": null, "superficie": 62, "locali": 2, "bagni": 1, "piano": 3, "classe": "C", "descrizione": "Annuncio di esempio. Bilocale arredato in un palazzo d'epoca con portineria. Soggiorno con cucina a vista, camera matrimoniale e bagno finestrato.\n\nDisponibile da subito.", "descrizione_en": "Sample listing. Furnished flat in a period building with concierge. Living room with open kitchen, double bedroom and bathroom with window.\n\nAvailable now.", "foto": ["https://static.wixstatic.com/media/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg", "https://static.wixstatic.com/media/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg", "https://static.wixstatic.com/media/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg", "https://static.wixstatic.com/media/30e230_bac63542fc1d4b9982e86e575f3a2c27f000.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bac63542fc1d4b9982e86e575f3a2c27f000.jpg"], "planimetria": ""}, {"codice": "LM02", "pubblicato": true, "evidenza": true, "contratto": "vendita", "stato": "disponibile", "titolo": "Trilocale con terrazzo", "titolo_en": "Two bedroom flat with terrace", "zona": "Magenta", "prezzo": 740000, "superficie": 108, "locali": 3, "bagni": 2, "piano": 5, "classe": "B", "descrizione": "Annuncio di esempio. Ultimo piano con terrazzo abitabile, doppia esposizione e cantina.", "descrizione_en": "Sample listing. Top floor with a large terrace, dual aspect and cellar.", "foto": ["https://static.wixstatic.com/media/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg", "https://static.wixstatic.com/media/30e230_fea201a15d9441f29ddffd89e6f9d1a1~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_fea201a15d9441f29ddffd89e6f9d1a1~mv2.jpg", "https://static.wixstatic.com/media/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg", "https://static.wixstatic.com/media/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg", "https://static.wixstatic.com/media/30e230_bac63542fc1d4b9982e86e575f3a2c27f000.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bac63542fc1d4b9982e86e575f3a2c27f000.jpg"], "planimetria": ""}, {"codice": "LM03", "pubblicato": true, "evidenza": true, "contratto": "breve", "stato": "disponibile", "titolo": "Monolocale di design", "titolo_en": "Design studio flat", "zona": "Porta Romana", "prezzo": 140, "superficie": 38, "locali": 1, "bagni": 1, "piano": 2, "classe": "D", "descrizione": "Annuncio di esempio. Monolocale ristrutturato, ideale per soggiorni brevi in città.", "descrizione_en": "Sample listing. Renovated studio, ideal for short stays in the city.", "foto": ["https://static.wixstatic.com/media/30e230_fea201a15d9441f29ddffd89e6f9d1a1~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_fea201a15d9441f29ddffd89e6f9d1a1~mv2.jpg", "https://static.wixstatic.com/media/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_8df7596e45c04d5e86a331d5d79d1562~mv2.jpg"], "planimetria": ""}, {"codice": "LM04", "pubblicato": true, "evidenza": false, "contratto": "affitto", "stato": "affittato", "titolo": "Quadrilocale in corte", "titolo_en": "Three bedroom courtyard flat", "zona": "Sant'Ambrogio", "prezzo": 2900, "superficie": 140, "locali": 4, "bagni": 2, "piano": 1, "classe": "E", "descrizione": "Annuncio di esempio. Ampio appartamento affacciato su una corte interna silenziosa.", "descrizione_en": "Sample listing. Spacious flat overlooking a quiet inner courtyard.", "foto": ["https://static.wixstatic.com/media/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_bb70fa106fda4749be141b8c3aa98e54~mv2.jpg", "https://static.wixstatic.com/media/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg/v1/fill/w_1600,h_1200,al_c,q_80/30e230_d81dbc9888e14f4789d861a8ab981b3c~mv2.jpg"], "planimetria": ""}]}/*FALLBACK_END*/;
+  var FALLBACK=/*FALLBACK_START*/{"immobili": [{"codice": "LM01", "pubblicato": true, "evidenza": true, "contratto": "affitto", "stato": "affittato", "titolo": "Appartamento con finestre ad arco", "titolo_en": "Flat with arched windows", "zona": "Brera", "prezzo": null, "superficie": 62, "locali": 2, "bagni": 1, "piano": 3, "classe": "C", "descrizione": "Annuncio di esempio. Soggiorno luminoso con grandi finestre ad arco, cucina su misura e zona pranzo con panca.", "descrizione_en": "Sample listing. Bright living room with large arched windows, fitted kitchen and dining area with bench seating.", "foto": ["images/immobili/lm01_1a1cb87d48a_1.jpg", "images/immobili/lm01_1a1cb87d48a_2.jpg", "images/immobili/lm01_1a1cb87d48a_3.jpg"], "planimetria": ""}, {"codice": "LM02", "pubblicato": true, "evidenza": true, "contratto": "vendita", "stato": "disponibile", "titolo": "Mansarda con travi a vista", "titolo_en": "Attic flat with exposed beams", "zona": "Magenta", "prezzo": 740000, "superficie": 108, "locali": 3, "bagni": 2, "piano": 5, "classe": "B", "descrizione": "Annuncio di esempio. Ultimo piano sotto il tetto, con travi a vista, cucina con isola e porta finestra sul balcone.", "descrizione_en": "Sample listing. Top floor under the roof, with exposed beams, kitchen island and French window onto the balcony.", "foto": ["images/immobili/lm02_1a1cb87d783_1.jpg", "images/immobili/lm02_1a1cb87d783_2.jpg", "images/immobili/lm02_1a1cb87d783_3.jpg", "images/immobili/lm02_1a1cb87d783_4.jpg", "images/immobili/lm02_1a1cb87d783_5.jpg", "images/immobili/lm02_1a1cb87d783_6.jpg"], "planimetria": ""}]}/*FALLBACK_END*/;
 
   var CHEV='<svg viewBox="0 0 7 11" aria-hidden="true"><path d="M1 1l4.5 4.5L1 10" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>';
   var CHEVL='<svg viewBox="0 0 7 11" aria-hidden="true"><path d="M6 1L1.5 5.5 6 10" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>';
@@ -489,7 +487,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   }
 
   /* ---------- Intestazione e logo animato ---------- */
-  var hdr=qs('.hdr'),brand=qs('.hdr .brand'),hero=qs('.hero'),AR=768/296,lastY=0,docked=!hero,ticking=false;
+  var hdr=qs('.hdr'),brand=qs('.hdr .brand'),hero=qs('.hero'),AR=768/296,docked=!hero,ticking=false;
   function gutPx(){return Math.min(Math.max(16,innerWidth*0.022),40)}
   function morph(){
     var y=window.scrollY||0;
@@ -505,10 +503,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
       hdr.classList.toggle('is-over',!docked);
     }
     hdr.classList.toggle('is-scrolled',y>4);
-    var busy=doc.body.classList.contains('nav-open')||doc.body.classList.contains('drawer-open');
-    if(docked&&!busy&&y>lastY+6&&y>hdr.offsetHeight*2)hdr.classList.add('is-hidden');
-    else if(y<lastY-6||!docked||busy)hdr.classList.remove('is-hidden');
-    lastY=y;ticking=false;
+    ticking=false;
   }
   function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(morph)}}
   window.addEventListener('scroll',onScroll,{passive:true});

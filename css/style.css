@@ -58,7 +58,6 @@ svg.logo{display:block;width:100%;height:auto;overflow:visible}
 /* Intestazione */
 .hdr{position:fixed;top:0;left:0;right:0;z-index:50;height:calc(var(--navh) + env(safe-area-inset-top,0px));padding:env(safe-area-inset-top,0px) var(--gut) 0;display:grid;grid-template-columns:1fr 1fr;align-items:center;background:var(--bar);color:var(--ink);transition:background .35s,color .35s,transform .45s var(--ease)}
 .hdr.is-over{background:transparent;color:var(--cream)}
-.hdr.is-hidden{transform:translateY(-100%)}
 .brand{position:absolute;left:50%;top:calc(50% + env(safe-area-inset-top,0px) / 2);width:var(--logo-w);transform:translate(-50%,-50%);transform-origin:50% 50%;z-index:2}
 .nav-l{justify-self:start;display:flex;align-items:center;gap:clamp(16px,2vw,32px)}
 .nav-r{justify-self:end;display:flex;align-items:center;gap:clamp(16px,2vw,32px)}
@@ -124,12 +123,11 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .count{font-size:var(--fs-small);color:var(--muted)}
 
 /* Servizi in home */
-.svc-band{background:var(--green);color:var(--cream)}
+.svc-band{background:var(--bar);color:var(--ink)}
 .svc-cols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(24px,2.2vw,44px)}
-.svc-col{border-top:1px solid rgba(253,251,247,.3);padding-top:18px;display:grid;gap:10px;align-content:start}
+.svc-col{border-top:1px solid var(--line);padding-top:18px;display:grid;gap:10px;align-content:start}
 .svc-col p{opacity:.82;font-size:var(--fs-small);max-width:32ch}
 .svc-col .link{justify-self:start;font-size:var(--fs-small)}
-.svc-band .btn:hover{background:var(--cream);color:var(--green);border-color:var(--cream)}
 @media (max-width:1200px){.svc-cols{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:820px){.svc-cols{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.svc-cols{grid-template-columns:1fr}}
