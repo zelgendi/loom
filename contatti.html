@@ -323,9 +323,11 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 @media (max-width:480px){.ftr-cols{grid-template-columns:1fr}}
 
 /* Avviso cookie */
-.ck{position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:65;max-width:420px;background:var(--ink);color:var(--cream);padding:16px 18px;display:grid;gap:12px;font-size:var(--fs-small);line-height:1.45}
+.ck{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:65;width:min(280px,calc(100vw - 32px));background:var(--ink);color:var(--cream);padding:12px 14px;display:grid;gap:10px;font-size:12px;line-height:1.4}
+@media (max-width:760px){.ck{bottom:auto;top:calc(var(--navh) + env(safe-area-inset-top,0px) + 10px);right:10px;width:min(200px,calc(100vw - 20px));padding:10px 12px;font-size:11px}}
 .ck[hidden]{display:none}
-.ck-act{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.ck-act{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ck .btn{min-height:30px;padding:0 10px;font-size:11px}
 .ck a{text-underline-offset:4px}
 
 @media (prefers-reduced-motion:reduce){
@@ -372,7 +374,6 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
     <div><h2 data-en="Studio">Studio</h2><p>Corso Magenta 56<br>20123 Milano</p><p style="font-size:var(--fs-small);margin-top:6px"><a class="link" href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Magenta+56+20123+Milano" target="_blank" rel="noopener" data-en="Open in Maps">Apri in Maps</a></p></div>
     <div><h2 data-en="Phone">Telefono</h2><p><a href="tel:+393453138165">+39 345 313 8165</a></p></div>
     <div><h2>WhatsApp</h2><p><a href="https://wa.me/393453138165" target="_blank" rel="noopener" data-en="Write on WhatsApp">Scrivi su WhatsApp</a></p></div>
-    <div><h2>Email</h2><p><a href="#" data-mail>email</a></p></div>
   </div>
   <form class="form" id="form" data-fs method="POST">
     <input type="hidden" name="_subject" value="Nuova richiesta dal sito LOOM">
@@ -397,7 +398,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   <div class="ftr-cols">
     <div><a class="flogo" href="index.html" aria-label="LOOM House by Zena"><svg class="logo" viewBox="0 0 768 296" aria-hidden="true"><use href="#full"/></svg></a></div>
     <div><h2 class="ftr-h">Studio</h2><p>Corso Magenta 56<br>20123 Milano</p><p><a href="https://www.google.com/maps/search/?api=1&amp;query=Corso+Magenta+56+20123+Milano" target="_blank" rel="noopener" data-en="Open in Maps">Apri in Maps</a></p></div>
-    <div><h2 class="ftr-h" data-en="Contact">Contatti</h2><p><a href="tel:+393453138165">+39 345 313 8165</a></p><p><a href="#" data-mail>email</a></p><p><a href="https://wa.me/393453138165" target="_blank" rel="noopener">WhatsApp</a></p></div>
+    <div><h2 class="ftr-h" data-en="Contact">Contatti</h2><p><a href="tel:+393453138165">+39 345 313 8165</a></p><p><a href="https://wa.me/393453138165" target="_blank" rel="noopener">WhatsApp</a></p></div>
     <div><h2 class="ftr-h" data-en="Company details">Dati societari</h2><p>Zena El Gendi</p><p><span data-en="Registered office">Sede legale</span>: Via Giuseppe Revere 10, 20123 Milano</p><p><span data-en="VAT number">P. IVA</span> 09908660963</p></div>
   </div>
   <div class="ftr-bottom">
@@ -617,7 +618,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
     qs('[data-title]').innerHTML='<h1>'+esc(ti)+', <em>'+esc(l.zona)+'</em></h1><div class="r"><div class="d-specs">'+sp.map(function(s){return esc(s)}).join('<br>')+'</div><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button></div>';
     var pic=photos[1]||photos[0];
     qs('[data-side]').innerHTML=(pic?'<div class="pic" data-open="'+(photos[1]?1:0)+'" role="button" tabindex="0" aria-label="'+esc(t.full)+'"><img src="'+esc(pic)+'" alt="" loading="lazy"></div>':'')+
-      '<p class="who">LOOM House by Zena<br><a href="tel:+393453138165">+39 345 313 8165</a><br><a href="#" data-mail>email</a></p><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button>';
+      '<p class="who">LOOM House by Zena<br><a href="tel:+393453138165">+39 345 313 8165</a></p><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button>';
     var desc=tx(l,'descrizione'),paras=desc.split(/\n\s*\n/).filter(Boolean).map(function(p){return '<p>'+esc(p).replace(/\n/g,'<br>')+'</p>'}).join('');
     var long=desc.length>900;
     qs('[data-text]').innerHTML=paras?'<div class="d-desc'+(long?' clip':'')+'">'+paras+'</div>'+(long?'<button class="more" type="button" data-more>'+esc(t.more)+' '+DOWN+'</button>':''):'';

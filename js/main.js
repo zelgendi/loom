@@ -203,7 +203,7 @@
     qs('[data-title]').innerHTML='<h1>'+esc(ti)+', <em>'+esc(l.zona)+'</em></h1><div class="r"><div class="d-specs">'+sp.map(function(s){return esc(s)}).join('<br>')+'</div><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button></div>';
     var pic=photos[1]||photos[0];
     qs('[data-side]').innerHTML=(pic?'<div class="pic" data-open="'+(photos[1]?1:0)+'" role="button" tabindex="0" aria-label="'+esc(t.full)+'"><img src="'+esc(pic)+'" alt="" loading="lazy"></div>':'')+
-      '<p class="who">LOOM House by Zena<br><a href="tel:+393453138165">+39 345 313 8165</a><br><a href="#" data-mail>email</a></p><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button>';
+      '<p class="who">LOOM House by Zena<br><a href="tel:+393453138165">+39 345 313 8165</a></p><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button>';
     var desc=tx(l,'descrizione'),paras=desc.split(/\n\s*\n/).filter(Boolean).map(function(p){return '<p>'+esc(p).replace(/\n/g,'<br>')+'</p>'}).join('');
     var long=desc.length>900;
     qs('[data-text]').innerHTML=paras?'<div class="d-desc'+(long?' clip':'')+'">'+paras+'</div>'+(long?'<button class="more" type="button" data-more>'+esc(t.more)+' '+DOWN+'</button>':''):'';
