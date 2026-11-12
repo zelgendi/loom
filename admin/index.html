@@ -314,14 +314,32 @@ function fail(e){
 }
 
 /* ---------- accesso ---------- */
+/* Accesso: su Cloudflare Pages passa da /api/auth (functions/api), altrimenti dal servizio di Netlify */
+var CF_AUTH=null;
+if(/^https?:/.test(location.href)&&window.fetch){fetch('/api/auth?check=1',{cache:'no-store'}).then(function(r){return r.ok?r.json():null}).then(function(j){CF_AUTH=!!(j&&j.loom_auth)}).catch(function(){CF_AUTH=false})}
+function gotToken(token,keep){
+  S.token=token;sessionStorage.setItem(TOKEN_KEY,S.token);
+  if(keep){layer();toast('Accesso rinnovato. Ora puoi salvare.');return}
+  afterLogin().catch(function(e){S.fatal={t:'Accesso non riuscito',m:e.message};go('fatal')});
+}
 function login(keep){
+  if(CF_AUTH){
+    var w=window.open('/api/auth','loom_auth','width=620,height=720');
+    if(!w){toast('Il browser ha bloccato la finestra di accesso. Consenti i popup per questo sito e riprova.',true);return}
+    var on=function(e){
+      if(e.origin!==location.origin||!e.data||e.data.loom_auth!==1)return;
+      window.removeEventListener('message',on);
+      if(!e.data.token){toast('Accesso non completato. Riprova.',true);return}
+      gotToken(e.data.token,keep);
+    };
+    window.addEventListener('message',on);
+    return;
+  }
   if(!window.netlify||!netlify.default){toast('Il servizio di accesso non si è caricato. Controlla la connessione e ricarica la pagina.',true);return}
   var a=new netlify.default({});
   a.authenticate({provider:'github',scope:'repo'},function(err,data){
     if(err){toast('Accesso non completato. Riprova.',true);return}
-    S.token=data.token;sessionStorage.setItem(TOKEN_KEY,S.token);
-    if(keep){layer();toast('Accesso rinnovato. Ora puoi salvare.');return}
-    afterLogin().catch(function(e){S.fatal={t:'Accesso non riuscito',m:e.message};go('fatal')});
+    gotToken(data.token,keep);
   });
 }
 function afterLogin(){
