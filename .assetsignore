@@ -1,0 +1,11 @@
+.git
+.gitignore
+.assetsignore
+.wrangler
+node_modules
+worker
+functions
+wrangler.jsonc
+CLAUDE.md
+LEGGIMI.txt
+.gitignore

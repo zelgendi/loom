@@ -16,10 +16,10 @@ Prima di mandare uno zip per correzioni, scaricarlo da GitHub, così contiene gl
 
 MESSA ONLINE
 1. Creare un repository GitHub (privato va bene) e caricarci tutti i file di questa cartella.
-2. Creare un progetto Cloudflare Pages collegato al repository, ramo di produzione main, comando di build exit 0, cartella di output vuota (la radice).
+2. Creare su Cloudflare un progetto Workers chiamato loom collegato al repository, ramo di produzione main. La configurazione è in wrangler.jsonc; i file esclusi dalla pubblicazione sono in .assetsignore.
 3. Collegare il dominio e attivare HTTPS.
 4. Su GitHub creare una OAuth App: Homepage URL il dominio del sito, Authorization callback URL https://dominio/api/auth/callback
-5. In Cloudflare Pages, nelle variabili del progetto, aggiungere GITHUB_CLIENT_ID e GITHUB_CLIENT_SECRET (quest'ultima come segreto) con i valori della OAuth App, poi ripubblicare. Il login è gestito dai file in functions/api/auth/.
+5. Nel progetto Cloudflare, nelle variabili e segreti, aggiungere GITHUB_CLIENT_ID e GITHUB_CLIENT_SECRET (quest'ultima come segreto) con i valori della OAuth App, poi ripubblicare. Il login è gestito da worker/index.js e dai file in functions/api/auth/.
 6. In admin/config.yml sostituire PROPRIETARIO/NOME-REPO con il repository reale.
 7. Invitare l'account GitHub della cliente come collaboratore del repository.
 8. La cliente entra da tuodominio/admin/ con il pulsante di accesso GitHub.

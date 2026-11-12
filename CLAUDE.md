@@ -3,7 +3,7 @@
 ## Progetto
 Sito di LOOM House by Zena (Zena El Gendi), studio immobiliare a Milano.
 HTML, CSS e JavaScript puri, senza framework e senza passaggi di build.
-Cloudflare Pages pubblica il branch `main` di questo repository: ogni modifica che arriva su `main` va online in un paio di minuti.
+Cloudflare (progetto Workers `loom`, configurato in `wrangler.jsonc`) pubblica il branch `main` di questo repository: ogni modifica che arriva su `main` va online in un paio di minuti.
 
 ## Struttura
 1. Pagine: `index.html`, `immobili.html`, `immobile.html`, `servizi.html`, `chi-siamo.html` (fuori dal menu), `contatti.html`, `grazie.html`, `privacy.html`, `cookie.html`
@@ -12,14 +12,14 @@ Cloudflare Pages pubblica il branch `main` di questo repository: ogni modifica c
 4. `admin/`: pannello annunci (`index.html` autonomo, `config.yml` indica solo il repository)
 5. `images/`: logo, favicon, anteprima social; `images/immobili/` riceve le foto caricate dal pannello
 6. `fonts/`: Hanken Grotesk (testi), Newsreader (titoli), Jost (solo scritta del logo)
-7. `functions/api/auth/`: login GitHub del pannello su Cloudflare Pages
+7. `functions/api/auth/` e `worker/index.js`: login GitHub del pannello su Cloudflare; `wrangler.jsonc` e `.assetsignore` dicono a Cloudflare cosa pubblicare
 
 ## Regole sui file
 1. Ogni pagina HTML contiene una copia incorporata di `css/style.css` tra i commenti `LOOM:STYLE` e di `js/main.js` tra i commenti `LOOM:SCRIPT`. Quando modifichi uno dei due file condivisi, aggiorna la copia incorporata in tutte le pagine. Nelle pagine i percorsi dei font sono `fonts/` invece di `../fonts/`.
 2. Intestazione e piè di pagina sono tra `LOOM:HEADER` e `LOOM:FOOTER` e sono uguali in tutte le pagine: ogni modifica va replicata ovunque.
 3. `js/main.js` contiene una copia di riserva degli annunci tra `FALLBACK_START` e `FALLBACK_END`, usata solo quando le pagine sono aperte dal disco.
 4. Non modificare mai `data/immobili.json`, le foto in `images/immobili/` e `admin/config.yml`.
-5. `admin/index.html` ha stile e script propri e salva tramite l'API di GitHub; il login GitHub passa da `functions/api/auth/` (Cloudflare Pages Functions, variabili GITHUB_CLIENT_ID e GITHUB_CLIENT_SECRET). Toccalo solo se la richiesta riguarda il pannello.
+5. `admin/index.html` ha stile e script propri e salva tramite l'API di GitHub; il login GitHub passa da `/api/auth`, gestito da `worker/index.js` con il codice in `functions/api/auth/` (variabili GITHUB_CLIENT_ID e GITHUB_CLIENT_SECRET su Cloudflare). Toccalo solo se la richiesta riguarda il pannello.
 
 ## Regole sui testi
 1. Mai trattini nei testi visibili, né lineette né trattini tra parole.
