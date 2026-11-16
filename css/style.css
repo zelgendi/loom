@@ -291,7 +291,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 
 /* Piè di pagina */
 .ftr{background:var(--bar);padding:clamp(56px,6vw,110px) var(--gut) calc(24px + env(safe-area-inset-bottom,0px));font-size:var(--fs-small);line-height:1.6}
-.ftr-cols{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:32px}
+.ftr-cols{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));gap:32px}
 .flogo{display:block;width:clamp(150px,13vw,230px)}
 .ftr-h{font-size:var(--fs-small);font-weight:400;color:var(--muted);margin-bottom:.4em}
 .ftr a{text-decoration:none}
