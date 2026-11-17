@@ -193,7 +193,7 @@
     {
       "codice": "LM02",
       "pubblicato": true,
-      "evidenza": false,
+      "evidenza": true,
       "contratto": "vendita",
       "stato": "disponibile",
       "titolo": "Appartamento con terrazzino nel cuore di Milano",
