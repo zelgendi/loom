@@ -116,6 +116,14 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .js .hero img{transform:scale(1.06);transition:transform 2s var(--ease)}
 .ready .hero img{transform:none}
 .home .brand{will-change:transform;backface-visibility:hidden}
+.hero-logo{display:none}
+.m-mode .brand{will-change:auto;opacity:0;transition:opacity .35s}
+.m-mode:not(.is-over) .brand,body.nav-open .m-mode .brand{opacity:1}
+@media (hover:none) and (pointer:coarse){
+  .hero-logo{display:block;position:absolute;left:0;right:0;bottom:var(--gut);z-index:1;margin:0 auto;width:min(calc(100% - 2 * var(--gut)),calc(100svh * .8822));color:var(--cream);pointer-events:none}
+  .js .hero-logo svg{opacity:0;transition:opacity 1.2s .25s}
+  .ready .hero-logo svg{opacity:1}
+}
 .js .home .brand svg{opacity:0;transition:opacity 1.2s .25s}
 .ready .home .brand svg{opacity:1}
 .intro{padding:clamp(28px,3vw,48px) var(--gut) clamp(72px,9vw,160px);display:grid;gap:10px}
@@ -332,6 +340,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .hero img{transform:none}
   .js .home .brand svg{opacity:1}
+  .js .hero-logo svg{opacity:1}
   .js .rv .ph{clip-path:none}
 }
 .form-msg{grid-column:1/-1;font-size:var(--fs-small);color:#9a3b2a}
@@ -467,9 +476,16 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   function gutPx(){return Math.min(Math.max(16,innerWidth*0.022),40)}
   /* Misure lette solo all'avvio e al ridimensionamento, mai durante lo scroll: il logo nasce alla misura grande
      e scorrendo viene solo spostato e rimpicciolito (transform), così resta fluido anche su telefono. */
+  /* Su telefono e tablet il logo grande sta nella foto (.hero-logo) e scorre con la pagina senza JavaScript;
+     la barra con il logo piccolo compare quando il logo grande le passa sotto. Su computer resta l'animazione. */
+  var touch=window.matchMedia&&matchMedia('(hover:none) and (pointer:coarse)').matches;
   function measure(){
     if(!hero||!brand)return;
     brand.style.width='';
+    if(touch){
+      var hl=qs('.hero-logo',hero);brand.style.transform='';hdr.classList.add('m-mode');
+      geo={mobile:true,T:hl?hl.offsetTop-hdr.offsetHeight:hero.offsetHeight*0.5};lastP=-1;return;
+    }
     var w0=brand.offsetWidth||1,vw=innerWidth,H=hero.offsetHeight,g=gutPx();
     var wb=Math.max(w0,Math.min(vw-2*g,H*0.34*AR));
     brand.style.width=wb+'px';
@@ -477,7 +493,9 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   }
   function morph(){
     var y=window.scrollY||0;
-    if(geo){
+    if(geo&&geo.mobile){
+      if(docked!==(y>=geo.T)){docked=y>=geo.T;hdr.classList.toggle('is-over',!docked)}
+    }else if(geo){
       var p=Math.min(1,Math.max(0,y/geo.D));
       if(p!==lastP){
         var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;

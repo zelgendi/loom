@@ -95,6 +95,14 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .js .hero img{transform:scale(1.06);transition:transform 2s var(--ease)}
 .ready .hero img{transform:none}
 .home .brand{will-change:transform;backface-visibility:hidden}
+.hero-logo{display:none}
+.m-mode .brand{will-change:auto;opacity:0;transition:opacity .35s}
+.m-mode:not(.is-over) .brand,body.nav-open .m-mode .brand{opacity:1}
+@media (hover:none) and (pointer:coarse){
+  .hero-logo{display:block;position:absolute;left:0;right:0;bottom:var(--gut);z-index:1;margin:0 auto;width:min(calc(100% - 2 * var(--gut)),calc(100svh * .8822));color:var(--cream);pointer-events:none}
+  .js .hero-logo svg{opacity:0;transition:opacity 1.2s .25s}
+  .ready .hero-logo svg{opacity:1}
+}
 .js .home .brand svg{opacity:0;transition:opacity 1.2s .25s}
 .ready .home .brand svg{opacity:1}
 .intro{padding:clamp(28px,3vw,48px) var(--gut) clamp(72px,9vw,160px);display:grid;gap:10px}
@@ -311,6 +319,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .js .hero img{transform:none}
   .js .home .brand svg{opacity:1}
+  .js .hero-logo svg{opacity:1}
   .js .rv .ph{clip-path:none}
 }
 .form-msg{grid-column:1/-1;font-size:var(--fs-small);color:#9a3b2a}

@@ -30,7 +30,7 @@ Cloudflare (progetto Workers `loom`, configurato in `wrangler.jsonc`) pubblica i
 ## Stile
 Ispirato a Fantastic Frank. Sfondo `#FDFBF7`, barra e piè di pagina `#F1F1EA`, testo `#1E1E19`, verde `#2C4238`.
 Proporzioni fluide con `clamp`: il sito deve funzionare allo stesso modo su schermo da 11 pollici, ultrawide e telefono, senza vuoti né compressioni.
-Movimento di livello medio: logo che si rimpicciolisce nella barra scorrendo, foto che si svelano. Rispettare `prefers-reduced-motion`.
+Movimento di livello medio: logo che si rimpicciolisce nella barra scorrendo, foto che si svelano. Su telefono e tablet il logo grande sta nella foto (`.hero-logo`) e scorre con la pagina, mentre la barra con il logo piccolo compare quando ci passa sotto: l'animazione via JavaScript a ogni scroll risultava a scatti. Rispettare `prefers-reduced-motion`.
 
 ## Requisiti fissi
 Moduli FormSubmit con indirizzo email composto nello script (oggetto `MAIL` in `js/main.js`), avviso cookie sobrio, privacy e cookie policy, ragione sociale e P. IVA nel piè di pagina.

@@ -74,9 +74,16 @@
   function gutPx(){return Math.min(Math.max(16,innerWidth*0.022),40)}
   /* Misure lette solo all'avvio e al ridimensionamento, mai durante lo scroll: il logo nasce alla misura grande
      e scorrendo viene solo spostato e rimpicciolito (transform), così resta fluido anche su telefono. */
+  /* Su telefono e tablet il logo grande sta nella foto (.hero-logo) e scorre con la pagina senza JavaScript;
+     la barra con il logo piccolo compare quando il logo grande le passa sotto. Su computer resta l'animazione. */
+  var touch=window.matchMedia&&matchMedia('(hover:none) and (pointer:coarse)').matches;
   function measure(){
     if(!hero||!brand)return;
     brand.style.width='';
+    if(touch){
+      var hl=qs('.hero-logo',hero);brand.style.transform='';hdr.classList.add('m-mode');
+      geo={mobile:true,T:hl?hl.offsetTop-hdr.offsetHeight:hero.offsetHeight*0.5};lastP=-1;return;
+    }
     var w0=brand.offsetWidth||1,vw=innerWidth,H=hero.offsetHeight,g=gutPx();
     var wb=Math.max(w0,Math.min(vw-2*g,H*0.34*AR));
     brand.style.width=wb+'px';
@@ -84,7 +91,9 @@
   }
   function morph(){
     var y=window.scrollY||0;
-    if(geo){
+    if(geo&&geo.mobile){
+      if(docked!==(y>=geo.T)){docked=y>=geo.T;hdr.classList.toggle('is-over',!docked)}
+    }else if(geo){
       var p=Math.min(1,Math.max(0,y/geo.D));
       if(p!==lastP){
         var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
