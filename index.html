@@ -579,14 +579,17 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
       var t=T[lang],btn=qs('button[type="submit"]',f),lab=btn&&qs('span',btn),old=lab&&lab.textContent,msg=qs('.form-msg',f);
       if(!msg){msg=doc.createElement('p');msg.className='form-msg';msg.setAttribute('role','status');f.appendChild(msg)}
       msg.textContent='';f.setAttribute('data-busy','1');if(btn)btn.disabled=true;if(lab)lab.textContent=t.sending;
-      var data={};new FormData(f).forEach(function(v,k){if(k!=='_next')data[k]=v});
-      function fail(){f.removeAttribute('data-busy');if(btn)btn.disabled=false;if(lab)lab.textContent=old;msg.textContent=t.sendErr}
-      fetch('https://formsubmit.co/ajax/'+mail(),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+      var data=new URLSearchParams();new FormData(f).forEach(function(v,k){if(k!=='_next')data.append(k,v)});
+      var done=false,ctl=window.AbortController?new AbortController():null;
+      function fail(){if(done)return;done=true;f.removeAttribute('data-busy');if(btn)btn.disabled=false;if(lab)lab.textContent=old;msg.textContent=t.sendErr}
+      var tmo=setTimeout(function(){if(ctl)ctl.abort();fail()},20000);
+      /* Corpo urlencoded e solo l'intestazione Accept: richiesta CORS semplice, senza preflight. Dopo 20 secondi senza risposta compare l'errore. */
+      fetch('https://formsubmit.co/ajax/'+mail(),{method:'POST',headers:{'Accept':'application/json'},body:data,signal:ctl?ctl.signal:undefined})
         .then(function(r){return r.json().catch(function(){return{}})})
-        .then(function(r){
+        .then(function(r){clearTimeout(tmo);if(done)return;
           if(r&&(r.success===true||r.success==='true'))location.href=nx&&nx.value?nx.value:'grazie.html';
           else{if(window.console)console.warn('FormSubmit:',r&&r.message);fail()}
-        }).catch(fail);
+        }).catch(function(){clearTimeout(tmo);fail()});
     });
   });
   var tipo=new URLSearchParams(location.search).get('tipo');
