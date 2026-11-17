@@ -313,3 +313,5 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   .js .home .brand svg{opacity:1}
   .js .rv .ph{clip-path:none}
 }
+.form-msg{grid-column:1/-1;font-size:var(--fs-small);color:#9a3b2a}
+.form-msg:empty{display:none}

@@ -334,6 +334,8 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   .js .home .brand svg{opacity:1}
   .js .rv .ph{clip-path:none}
 }
+.form-msg{grid-column:1/-1;font-size:var(--fs-small);color:#9a3b2a}
+.form-msg:empty{display:none}
 
 </style>
 <!-- /LOOM:STYLE -->
@@ -441,7 +443,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
         cls:function(c){return c==='nd'?'In attesa':c},
         count:function(n){return n===1?'1 immobile':n+' immobili'},
         empty:'Al momento non ci sono immobili in questa categoria.',emptyCta:'Scrivici cosa cerchi',
-        none:'Gli immobili saranno pubblicati a breve.',
+        none:'Gli immobili saranno pubblicati a breve.',sending:'Invio in corso',sendErr:'Invio non riuscito. Riprova tra poco oppure scrivici su WhatsApp.',
         f:{status:'Stato',contract:'Contratto',area:'Zona',price:'Prezzo',size:'Superficie',rooms:'Locali',baths:'Bagni',floor:'Piano',cls:'Classe energetica',code:'Codice'},
         facts:'Dati',shortcuts:'Scorciatoie',map:'Mappa della zona',enq:'Richiedi una visita',hl:'Punti di forza',
         more:'Leggi tutto',less:'Riduci',plan:'Planimetria',photo:'Foto',of:'di',full:'Vedi le foto a schermo intero',close:'Chiudi',prev:'Foto precedente',next:'Foto successiva'},
@@ -453,7 +455,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
         cls:function(c){return c==='nd'?'Pending':c},
         count:function(n){return n===1?'1 property':n+' properties'},
         empty:'There are no properties in this category right now.',emptyCta:'Tell us what you are looking for',
-        none:'Properties will be published soon.',
+        none:'Properties will be published soon.',sending:'Sending',sendErr:'Sending failed. Please try again shortly or message us on WhatsApp.',
         f:{status:'Status',contract:'Contract',area:'Area',price:'Price',size:'Size',rooms:'Rooms',baths:'Bathrooms',floor:'Floor',cls:'Energy class',code:'Reference'},
         facts:'Facts',shortcuts:'Shortcuts',map:'Map of the area',enq:'Book a viewing',hl:'Highlights',
         more:'Read more',less:'Read less',plan:'Floor plan',photo:'Photo',of:'of',full:'See photos full screen',close:'Close',prev:'Previous photo',next:'Next photo'}
@@ -549,6 +551,24 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
     f.action='https://formsubmit.co/'+mail();
     var nx=qs('input[name="_next"]',f);
     if(nx){if(/^https?:/.test(location.href))nx.value=new URL('grazie.html',location.href).href;else nx.parentNode.removeChild(nx)}
+    /* Invio in background (endpoint AJAX di FormSubmit): niente pagina intermedia di FormSubmit,
+       si va a grazie.html solo se l'invio riesce, altrimenti compare un messaggio sotto il pulsante. */
+    if(!window.fetch||!/^https?:/.test(location.href))return;
+    f.addEventListener('submit',function(ev){
+      ev.preventDefault();
+      if(f.getAttribute('data-busy'))return;
+      var t=T[lang],btn=qs('button[type="submit"]',f),lab=btn&&qs('span',btn),old=lab&&lab.textContent,msg=qs('.form-msg',f);
+      if(!msg){msg=doc.createElement('p');msg.className='form-msg';msg.setAttribute('role','status');f.appendChild(msg)}
+      msg.textContent='';f.setAttribute('data-busy','1');if(btn)btn.disabled=true;if(lab)lab.textContent=t.sending;
+      var data={};new FormData(f).forEach(function(v,k){if(k!=='_next')data[k]=v});
+      function fail(){f.removeAttribute('data-busy');if(btn)btn.disabled=false;if(lab)lab.textContent=old;msg.textContent=t.sendErr}
+      fetch('https://formsubmit.co/ajax/'+mail(),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){return r.json().catch(function(){return{}})})
+        .then(function(r){
+          if(r&&(r.success===true||r.success==='true'))location.href=nx&&nx.value?nx.value:'grazie.html';
+          else{if(window.console)console.warn('FormSubmit:',r&&r.message);fail()}
+        }).catch(fail);
+    });
   });
   var tipo=new URLSearchParams(location.search).get('tipo');
   if(tipo==='lunghi'||tipo==='brevi')tipo='affitti';
