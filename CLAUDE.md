@@ -33,7 +33,7 @@ Proporzioni fluide con `clamp`: il sito deve funzionare allo stesso modo su sche
 Movimento di livello medio: logo che si rimpicciolisce nella barra scorrendo, foto che si svelano. L'animazione del logo usa le animazioni CSS legate allo scroll (classe `sda`, Safari 26 e Chrome) perché via JavaScript su telefono risultava a scatti; dove non sono supportate, su computer la calcola lo script e su telefono il logo grande resta nella foto (`.hero-logo`). Rispettare `prefers-reduced-motion`.
 
 ## Requisiti fissi
-Moduli FormSubmit con indirizzo email composto nello script (oggetto `MAIL` in `js/main.js`), avviso cookie sobrio, privacy e cookie policy, ragione sociale e P. IVA nel piè di pagina.
+Moduli inviati a `/api/contatto` (`functions/api/contatto.js`), che li manda per email a Zena tramite Cloudflare Email Service (binding `EMAIL` in `wrangler.jsonc`, destinatario verificato in Email Routing); l'indirizzo per privacy e cookie policy resta composto nello script (oggetto `MAIL` in `js/main.js`), avviso cookie sobrio, privacy e cookie policy, ragione sociale e P. IVA nel piè di pagina.
 
 ## Come lavorare
 1. Le correzioni arrivano in blocco: applica solo quelle richieste, senza rigenerare parti che vanno già bene.

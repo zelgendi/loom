@@ -24,8 +24,8 @@ MESSA ONLINE
 7. Invitare l'account GitHub della cliente come collaboratore del repository.
 8. La cliente entra da tuodominio/admin/ con il pulsante di accesso GitHub.
 
-FORMSUBMIT
-I moduli inviano a z.elgendi@gmail.com. Il primo invio dal sito online genera una email di attivazione da FormSubmit: va confermata, poi i messaggi arrivano normalmente.
+MODULI
+I moduli inviano a /api/contatto (functions/api/contatto.js), che scrive a z.elgendi@gmail.com tramite Cloudflare Email Service. Su Cloudflare deve essere attivo Email Routing per loomhouse.it e z.elgendi@gmail.com deve essere un indirizzo di destinazione verificato.
 
 PRIMA DEL LANCIO
 1. Sostituire le foto segnaposto: ora sono caricate dal vecchio sito Wix (static.wixstatic.com).

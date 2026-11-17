@@ -553,15 +553,14 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
     if(lbEl&&lbEl.classList.contains('open')){if(e.key==='ArrowRight')stepLb(1);if(e.key==='ArrowLeft')stepLb(-1)}
   });
 
-  /* ---------- Email e moduli FormSubmit ---------- */
+  /* ---------- Email e moduli (invio tramite /api/contatto sul Worker Cloudflare) ---------- */
   function wireMail(){qsa('[data-mail]').forEach(function(a){a.href='mailto:'+mail();a.textContent=mail()})}
   wireMail();
   qsa('form[data-fs]').forEach(function(f){
-    f.action='https://formsubmit.co/'+mail();
+    f.action='/api/contatto';
     var nx=qs('input[name="_next"]',f);
     if(nx){if(/^https?:/.test(location.href))nx.value=new URL('grazie.html',location.href).href;else nx.parentNode.removeChild(nx)}
-    /* Invio in background (endpoint AJAX di FormSubmit): niente pagina intermedia di FormSubmit,
-       si va a grazie.html solo se l'invio riesce, altrimenti compare un messaggio sotto il pulsante. */
+    /* Invio in background: si va a grazie.html solo se l'invio riesce, altrimenti compare un messaggio sotto il pulsante. */
     if(!window.fetch||!/^https?:/.test(location.href))return;
     f.addEventListener('submit',function(ev){
       ev.preventDefault();
@@ -573,12 +572,12 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
       var done=false,ctl=window.AbortController?new AbortController():null;
       function fail(){if(done)return;done=true;f.removeAttribute('data-busy');if(btn)btn.disabled=false;if(lab)lab.textContent=old;msg.textContent=t.sendErr}
       var tmo=setTimeout(function(){if(ctl)ctl.abort();fail()},20000);
-      /* Corpo urlencoded e solo l'intestazione Accept: richiesta CORS semplice, senza preflight. Dopo 20 secondi senza risposta compare l'errore. */
-      fetch('https://formsubmit.co/ajax/'+mail(),{method:'POST',headers:{'Accept':'application/json'},body:data,signal:ctl?ctl.signal:undefined})
+      /* Dopo 20 secondi senza risposta compare l'errore. */
+      fetch('/api/contatto',{method:'POST',headers:{'Accept':'application/json'},body:data,signal:ctl?ctl.signal:undefined})
         .then(function(r){return r.json().catch(function(){return{}})})
         .then(function(r){clearTimeout(tmo);if(done)return;
           if(r&&(r.success===true||r.success==='true'))location.href=nx&&nx.value?nx.value:'grazie.html';
-          else{if(window.console)console.warn('FormSubmit:',r&&r.message);fail()}
+          else{fail()}
         }).catch(function(){clearTimeout(tmo);fail()});
     });
   });
