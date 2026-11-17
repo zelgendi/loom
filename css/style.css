@@ -94,6 +94,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,18,15,.32) 0%,rgba(20,18,15,0) 22%,rgba(20,18,15,0) 55%,rgba(20,18,15,.38) 100%);pointer-events:none}
 .js .hero img{transform:scale(1.06);transition:transform 2s var(--ease)}
 .ready .hero img{transform:none}
+.home .brand{will-change:transform;backface-visibility:hidden}
 .js .home .brand svg{opacity:0;transition:opacity 1.2s .25s}
 .ready .home .brand svg{opacity:1}
 .intro{padding:clamp(28px,3vw,48px) var(--gut) clamp(72px,9vw,160px);display:grid;gap:10px}

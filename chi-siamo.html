@@ -115,6 +115,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,18,15,.32) 0%,rgba(20,18,15,0) 22%,rgba(20,18,15,0) 55%,rgba(20,18,15,.38) 100%);pointer-events:none}
 .js .hero img{transform:scale(1.06);transition:transform 2s var(--ease)}
 .ready .hero img{transform:none}
+.home .brand{will-change:transform;backface-visibility:hidden}
 .js .home .brand svg{opacity:0;transition:opacity 1.2s .25s}
 .ready .home .brand svg{opacity:1}
 .intro{padding:clamp(28px,3vw,48px) var(--gut) clamp(72px,9vw,160px);display:grid;gap:10px}
@@ -465,27 +466,38 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   }
 
   /* ---------- Intestazione e logo animato ---------- */
-  var hdr=qs('.hdr'),brand=qs('.hdr .brand'),hero=qs('.hero'),AR=768/296,docked=!hero,ticking=false;
+  var hdr=qs('.hdr'),brand=qs('.hdr .brand'),hero=qs('.hero'),AR=768/296,docked=!hero,ticking=false,geo=null,lastP=-1;
   function gutPx(){return Math.min(Math.max(16,innerWidth*0.022),40)}
+  /* Misure lette solo all'avvio e al ridimensionamento, mai durante lo scroll: il logo nasce alla misura grande
+     e scorrendo viene solo spostato e rimpicciolito (transform), così resta fluido anche su telefono. */
+  function measure(){
+    if(!hero||!brand)return;
+    brand.style.width='';
+    var w0=brand.offsetWidth||1,vw=innerWidth,H=hero.offsetHeight,g=gutPx();
+    var wb=Math.max(w0,Math.min(vw-2*g,H*0.34*AR));
+    brand.style.width=wb+'px';
+    geo={w0:w0,wb:wb,hb:wb/AR,H:H,hh:hdr.offsetHeight,g:g,D:Math.max(1,H*0.5)};lastP=-1;
+  }
   function morph(){
     var y=window.scrollY||0;
-    if(hero&&brand){
-      var vw=innerWidth,hh=hdr.offsetHeight,H=hero.offsetHeight,w0=brand.offsetWidth||1,g=gutPx();
-      var wb=Math.min(vw-2*g,H*0.34*AR),hb=wb/AR,D=Math.max(1,H*0.5);
-      var p=Math.min(1,Math.max(0,y/D)),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
-      var dockCy=hh/2,bigCy=H-y-g-hb/2,cy=bigCy+(dockCy-bigCy)*e,s=wb/w0+(1-wb/w0)*e;
-      brand.style.transform='translate(-50%,-50%) translate(0,'+(cy-dockCy).toFixed(1)+'px) scale('+s.toFixed(4)+')';
-      var a=[253,251,247],b=[30,30,25];
-      brand.style.color='rgb('+a.map(function(v,i){return Math.round(v+(b[i]-v)*e)}).join(',')+')';
-      docked=p>=1;
-      hdr.classList.toggle('is-over',!docked);
+    if(geo){
+      var p=Math.min(1,Math.max(0,y/geo.D));
+      if(p!==lastP){
+        var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+        var dockCy=geo.hh/2,bigCy=geo.H-y-geo.g-geo.hb/2,cy=bigCy+(dockCy-bigCy)*e,s=1+(geo.w0/geo.wb-1)*e;
+        brand.style.transform='translate3d(-50%,-50%,0) translate3d(0,'+(cy-dockCy).toFixed(1)+'px,0) scale('+s.toFixed(4)+')';
+        lastP=p;
+      }
+      if(docked!==(p>=1)){docked=p>=1;hdr.classList.toggle('is-over',!docked)}
     }
-    hdr.classList.toggle('is-scrolled',y>4);
+    var sc=y>4;if(hdr.classList.contains('is-scrolled')!==sc)hdr.classList.toggle('is-scrolled',sc);
     ticking=false;
   }
   function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(morph)}}
+  var lastW=innerWidth;
+  function onResize(){if(innerWidth===lastW&&geo)return onScroll();lastW=innerWidth;requestAnimationFrame(function(){measure();morph()})}
   window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',onScroll);
+  window.addEventListener('resize',onResize);
   function closeMenu(){doc.body.classList.remove('nav-open');var b=qs('.burger');if(b)b.setAttribute('aria-expanded','false')}
 
   /* ---------- Pannello richiesta visita ---------- */
@@ -639,7 +651,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   doc.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches&&e.target.matches('.pic[data-open]')){e.preventDefault();openLb(+e.target.getAttribute('data-open'),'photos')}});
 
   /* ---------- Avvio ---------- */
-  applyLang();morph();load();
+  applyLang();measure();if(hero&&brand)hdr.classList.add('is-over');docked=!hero;morph();load();
   requestAnimationFrame(function(){requestAnimationFrame(function(){root.classList.add('ready')})});
 })();
 
