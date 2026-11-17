@@ -204,16 +204,13 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .d-title h1 em{font-style:italic}
 .d-title .r{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
 .d-specs{font-size:var(--fs-small);line-height:1.45}
-.d-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 24px;padding:clamp(40px,5vw,80px) var(--gut)}
-.d-side{display:grid;gap:12px;justify-items:start;align-content:start;padding-left:clamp(0px,8vw,140px)}
-.d-side .pic{width:min(100%,300px);aspect-ratio:4/5;overflow:hidden;background:#E9E7DF;cursor:zoom-in}
-.d-side .pic img{width:100%;height:100%;object-fit:cover}
+.d-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px 24px;padding:clamp(24px,3vw,48px) var(--gut) clamp(40px,5vw,80px)}
+.d-side{display:grid;gap:12px;justify-items:start;align-content:start;padding-top:18px;border-top:1px solid var(--line)}
 .d-side .who{font-size:var(--fs-small);line-height:1.5}
 .d-side .who a{text-decoration:underline;text-underline-offset:3px}
 .d-side .btn{width:min(100%,300px);margin-top:10px}
 .d-text{display:grid;align-content:start}
 .d-desc{display:grid;gap:1em;max-width:62ch}
-.d-desc p:first-child{text-indent:3em}
 .d-desc.clip{max-height:22em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 65%,transparent);mask-image:linear-gradient(#000 65%,transparent)}
 .more{justify-self:start;display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;margin-top:12px}
 .more svg{width:11px;height:7px}
@@ -255,7 +252,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   .d-title,.d-body,.d-hl,.d-facts{grid-template-columns:1fr}
   .d-title .r{flex-direction:column}
   .d-title .r .btn{width:100%}
-  .d-side{padding-left:0;order:2}
+  .d-side{order:2}
   .d-hl .label{justify-self:start;padding:0}
   .d-gal .row--2{grid-template-columns:1fr}
   .tbl{grid-template-columns:1fr}
@@ -628,9 +625,7 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
     var f=t.f,sp=specs(l);
     qs('[data-hero]').innerHTML=photos[0]?'<img src="'+esc(photos[0])+'" alt="'+esc(ti)+'"><button class="d-full" type="button" data-open="0" aria-label="'+esc(t.full)+'">'+FULL+'</button>':mark();
     qs('[data-title]').innerHTML='<h1>'+esc(ti)+', <em>'+esc(l.zona)+'</em></h1><div class="r"><div class="d-specs">'+sp.map(function(s){return esc(s)}).join('<br>')+'</div><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button></div>';
-    var pic=photos[1]||photos[0];
-    qs('[data-side]').innerHTML=(pic?'<div class="pic" data-open="'+(photos[1]?1:0)+'" role="button" tabindex="0" aria-label="'+esc(t.full)+'"><img src="'+esc(pic)+'" alt="" loading="lazy"></div>':'')+
-      '<p class="who">LOOM House by Zena<br><a href="tel:+393453138165">+39 345 313 8165</a></p><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button>';
+    qs('[data-side]').innerHTML='<p class="who">LOOM House by Zena<br><a href="tel:+393453138165">+39 345 313 8165</a></p><button class="btn" type="button" data-enq>'+esc(t.enq)+' '+CHEV+'</button>';
     var desc=tx(l,'descrizione'),paras=desc.split(/\n\s*\n/).filter(Boolean).map(function(p){return '<p>'+esc(p).replace(/\n/g,'<br>')+'</p>'}).join('');
     var long=desc.length>900;
     qs('[data-text]').innerHTML=paras?'<div class="d-desc'+(long?' clip':'')+'">'+paras+'</div>'+(long?'<button class="more" type="button" data-more>'+esc(t.more)+' '+DOWN+'</button>':''):'';
