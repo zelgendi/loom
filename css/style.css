@@ -96,10 +96,13 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .ready .hero img{transform:none}
 .home .brand{will-change:transform;backface-visibility:hidden}
 .hero-logo{display:none}
+@keyframes loom-dock{from{transform:translate3d(-50%,-50%,0) translate3d(0,var(--dock-y),0) scale(1)}to{transform:translate3d(-50%,-50%,0) scale(var(--dock-s))}}
+.sda .brand{animation:loom-dock linear both;animation-duration:auto;animation-timing-function:cubic-bezier(.45,0,.55,1);animation-timeline:scroll(root)}
 .m-mode .brand{will-change:auto;opacity:0;transition:opacity .35s}
 .m-mode:not(.is-over) .brand,body.nav-open .m-mode .brand{opacity:1}
 @media (hover:none) and (pointer:coarse){
-  .hero-logo{display:block;position:absolute;left:0;right:0;bottom:var(--gut);z-index:1;margin:0 auto;width:min(calc(100% - 2 * var(--gut)),calc(100svh * .8822));color:var(--cream);pointer-events:none}
+  .hero-logo.on{display:block}
+  .hero-logo{position:absolute;left:0;right:0;bottom:var(--gut);z-index:1;margin:0 auto;width:min(calc(100% - 2 * var(--gut)),calc(100svh * .8822));color:var(--cream);pointer-events:none}
   .js .hero-logo svg{opacity:0;transition:opacity 1.2s .25s}
   .ready .hero-logo svg{opacity:1}
 }

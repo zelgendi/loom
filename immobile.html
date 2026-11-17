@@ -117,10 +117,13 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
 .ready .hero img{transform:none}
 .home .brand{will-change:transform;backface-visibility:hidden}
 .hero-logo{display:none}
+@keyframes loom-dock{from{transform:translate3d(-50%,-50%,0) translate3d(0,var(--dock-y),0) scale(1)}to{transform:translate3d(-50%,-50%,0) scale(var(--dock-s))}}
+.sda .brand{animation:loom-dock linear both;animation-duration:auto;animation-timing-function:cubic-bezier(.45,0,.55,1);animation-timeline:scroll(root)}
 .m-mode .brand{will-change:auto;opacity:0;transition:opacity .35s}
 .m-mode:not(.is-over) .brand,body.nav-open .m-mode .brand{opacity:1}
 @media (hover:none) and (pointer:coarse){
-  .hero-logo{display:block;position:absolute;left:0;right:0;bottom:var(--gut);z-index:1;margin:0 auto;width:min(calc(100% - 2 * var(--gut)),calc(100svh * .8822));color:var(--cream);pointer-events:none}
+  .hero-logo.on{display:block}
+  .hero-logo{position:absolute;left:0;right:0;bottom:var(--gut);z-index:1;margin:0 auto;width:min(calc(100% - 2 * var(--gut)),calc(100svh * .8822));color:var(--cream);pointer-events:none}
   .js .hero-logo svg{opacity:0;transition:opacity 1.2s .25s}
   .ready .hero-logo svg{opacity:1}
 }
@@ -504,20 +507,33 @@ body.nav-open .hdr{background:var(--bar);color:var(--ink);transform:none}
   function gutPx(){return Math.min(Math.max(16,innerWidth*0.022),40)}
   /* Misure lette solo all'avvio e al ridimensionamento, mai durante lo scroll: il logo nasce alla misura grande
      e scorrendo viene solo spostato e rimpicciolito (transform), così resta fluido anche su telefono. */
-  /* Su telefono e tablet il logo grande sta nella foto (.hero-logo) e scorre con la pagina senza JavaScript;
-     la barra con il logo piccolo compare quando il logo grande le passa sotto. Su computer resta l'animazione. */
-  var touch=window.matchMedia&&matchMedia('(hover:none) and (pointer:coarse)').matches;
+  /* Animazione del logo in home. 1) Dove il browser supporta le animazioni legate allo scroll (Safari 26, Chrome),
+     il movimento è affidato al browser via CSS (classe sda): resta agganciato allo scorrimento anche su telefono.
+     2) Altrimenti su computer lo calcola lo script a ogni scroll; 3) su telefono senza supporto, o con
+     prefers-reduced-motion, il logo grande sta nella foto (.hero-logo) e la barra compare quando ci passa sotto. */
+  var mm=function(q){return window.matchMedia&&matchMedia(q).matches};
+  var reduce=mm('(prefers-reduced-motion: reduce)');
+  var sda=!reduce&&window.CSS&&CSS.supports&&CSS.supports('animation-timeline: scroll()')&&CSS.supports('animation-range: 0px 100px');
+  var touch=mm('(hover:none) and (pointer:coarse)');
   function measure(){
     if(!hero||!brand)return;
-    brand.style.width='';
-    if(touch){
-      var hl=qs('.hero-logo',hero);brand.style.transform='';hdr.classList.add('m-mode');
+    var hl=qs('.hero-logo',hero);brand.style.width='';hdr.classList.remove('m-mode','sda');if(hl)hl.classList.remove('on');
+    if(touch&&!sda){
+      brand.style.transform='';hdr.classList.add('m-mode');if(hl)hl.classList.add('on');
       geo={mobile:true,T:hl?hl.offsetTop-hdr.offsetHeight:hero.offsetHeight*0.5};lastP=-1;return;
     }
-    var w0=brand.offsetWidth||1,vw=innerWidth,H=hero.offsetHeight,g=gutPx();
-    var wb=Math.max(w0,Math.min(vw-2*g,H*0.34*AR));
+    var w0=brand.offsetWidth||1,vw=innerWidth,H=hero.offsetHeight,g=gutPx(),hh=hdr.offsetHeight;
+    var wb=Math.max(w0,Math.min(vw-2*g,H*0.34*AR)),hb=wb/AR,D=Math.max(1,H*0.5);
     brand.style.width=wb+'px';
-    geo={w0:w0,wb:wb,hb:wb/AR,H:H,hh:hdr.offsetHeight,g:g,D:Math.max(1,H*0.5)};lastP=-1;
+    if(sda){
+      brand.style.transform='';
+      brand.style.setProperty('--dock-y',((H-g-hb/2)-hh/2).toFixed(1)+'px');
+      brand.style.setProperty('--dock-s',(w0/wb).toFixed(4));
+      brand.style.animationRange='0px '+D.toFixed(0)+'px';
+      hdr.classList.add('sda');
+      geo={mobile:true,T:D};lastP=-1;return;
+    }
+    geo={w0:w0,wb:wb,hb:hb,H:H,hh:hh,g:g,D:D};lastP=-1;
   }
   function morph(){
     var y=window.scrollY||0;
