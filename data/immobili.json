@@ -70,7 +70,7 @@
     {
       "codice": "LM04",
       "pubblicato": true,
-      "evidenza": false,
+      "evidenza": true,
       "contratto": "affitto",
       "stato": "disponibile",
       "titolo": "Bilocale di charme con camino",
