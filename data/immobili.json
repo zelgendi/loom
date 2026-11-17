@@ -111,7 +111,7 @@
     {
       "codice": "LM03",
       "pubblicato": true,
-      "evidenza": true,
+      "evidenza": false,
       "contratto": "vendita",
       "stato": "disponibile",
       "titolo": "Dimora d'autore",
