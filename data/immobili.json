@@ -191,7 +191,7 @@
     {
       "codice": "LM03",
       "pubblicato": true,
-      "evidenza": false,
+      "evidenza": true,
       "contratto": "vendita",
       "stato": "disponibile",
       "titolo": "Dimora d'autore",
@@ -206,6 +206,7 @@
       "descrizione": "FIRENZE, VIA DELLA ROBBIA – ELEGANTE RESIDENZA D’EPOCA\nIn una delle zone residenziali più eleganti e ricercate di Firenze, in Via della Robbia, proponiamo in vendita un raffinato appartamento di 180 mq, situato al primo piano di un prestigioso palazzo d’epoca. La proprietà si distingue per il fascino degli ambienti, le finiture di alto livello e la particolare cura dei dettagli, in un armonioso equilibrio tra elementi architettonici originali e comfort contemporaneo. Gli interni, ampi e luminosi, sono caratterizzati da splendidi soffitti alti e decorati, pavimenti originali e materiali di pregio che conferiscono agli spazi un’atmosfera elegante, raffinata e ricca di personalità. La zona giorno comprende un ampio e luminoso salone di rappresentanza, impreziosito da soffitti decorati e grandi finestre, un'elegante sala da pranzo e una cucina dal design contemporaneo, perfettamente integrata nel contesto storico della proprietà. La zona notte si compone di tre camere da letto e tre bagni, con ambienti curati e ben distribuiti. La suite padronale, particolarmente suggestiva, è caratterizzata da un elegante letto a baldacchino, dispone di bagno privato en suite e gode di accesso diretto a un delizioso terrazzo riservato, immerso nel verde, ideale per piacevoli momenti di relax e tranquillità. Gli affacci, la luminosità naturale e gli elementi architettonici originali contribuiscono a rendere questa proprietà una residenza di grande charme, capace di coniugare il fascino delle dimore storiche fiorentine con le esigenze dell'abitare contemporaneo. L'appartamento è situato al primo piano di un palazzo d'epoca privo di ascensore. Una proprietà di rappresentanza, ideale per chi ricerca una residenza esclusiva nel cuore di una delle zone più apprezzate di Firenze, dove eleganza, riservatezza e fascino storico si incontrano.",
       "descrizione_en": "",
       "foto": [
+        "images/immobili/lm03_mwjlafnw_18.jpg",
         "images/immobili/lm03_mwjlafnw_1.jpg",
         "images/immobili/lm03_mwjlafnw_2.jpg",
         "images/immobili/lm03_mwjlafnw_3.jpg",
@@ -223,7 +224,6 @@
         "images/immobili/lm03_mwjlafnw_15.jpg",
         "images/immobili/lm03_mwjlafnw_16.jpg",
         "images/immobili/lm03_mwjlafnw_17.jpg",
-        "images/immobili/lm03_mwjlafnw_18.jpg",
         "images/immobili/lm03_mwjlafnw_19.jpg",
         "images/immobili/lm03_mwjlafnw_20.jpg",
         "images/immobili/lm03_mwjlafnw_21.jpg",
