@@ -1,6 +1,43 @@
 {
   "immobili": [
     {
+      "codice": "LM06",
+      "pubblicato": true,
+      "evidenza": false,
+      "contratto": "affitto",
+      "stato": "disponibile",
+      "titolo": "Loft",
+      "titolo_en": "",
+      "zona": "Via Vincenzo Monti",
+      "prezzo": 1500,
+      "superficie": 83,
+      "locali": 2,
+      "bagni": 1,
+      "piano": null,
+      "classe": "",
+      "descrizione": "VINCENZO MONTI ELEGANTE BILOCALE\nMilano – Via Vincenzo Monti 86 | Elegante bilocale arredato in locazione Nel cuore di una delle zone più prestigiose di Milano, proponiamo in locazione un elegante bilocale completamente arredato, situato in Via Vincenzo Monti 86, all’interno di un signorile stabile con servizio di portineria attivo tutto il giorno. L’appartamento, posto al piano seminterrato, sorprende per la sua eccezionale luminosità, garantita dalle ampie finestre e dai soffitti alti che rendono gli ambienti ariosi e piacevoli. La proprietà è composta da: * ampio soggiorno con zona pranzo; * cucina attrezzata; * camera da letto matrimoniale; * bagno; * finiture di ottimo livello con parquet in tutti gli ambienti. L’immobile viene locato completamente arredato, pronto per essere abitato, ideale per professionisti, manager o coppie che desiderano vivere in un contesto elegante e riservato. La posizione è strategica: a pochi passi da Corso Magenta, CityLife, Parco Sempione e dalle fermate della metropolitana, con tutti i principali servizi, negozi e ristoranti nelle immediate vicinanze. Disponibile da subito",
+      "descrizione_en": "",
+      "foto": [
+        "images/immobili/lm06_mwm243ls_1.jpg",
+        "images/immobili/lm06_mwm243ls_2.jpg",
+        "images/immobili/lm06_mwm243ls_3.jpg",
+        "images/immobili/lm06_mwm243ls_4.jpg",
+        "images/immobili/lm06_mwm243ls_5.jpg",
+        "images/immobili/lm06_mwm243ls_6.jpg",
+        "images/immobili/lm06_mwm243ls_7.jpg",
+        "images/immobili/lm06_mwm243ls_8.jpg",
+        "images/immobili/lm06_mwm243ls_9.jpg",
+        "images/immobili/lm06_mwm243ls_10.jpg",
+        "images/immobili/lm06_mwm243ls_11.jpg",
+        "images/immobili/lm06_mwm243ls_12.jpg",
+        "images/immobili/lm06_mwm243ls_13.jpg",
+        "images/immobili/lm06_mwm243ls_14.jpg"
+      ],
+      "planimetria": "",
+      "punti_forza": [],
+      "punti_forza_en": []
+    },
+    {
       "codice": "LM05",
       "pubblicato": true,
       "evidenza": false,
